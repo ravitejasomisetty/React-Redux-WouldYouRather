@@ -10,7 +10,7 @@ class UnansweredPoll extends React.Component {
     }
 
     render() {
-        const { authedUser, question, users } = this.props
+        const { question, users } = this.props
 
         return (<div>
             <img

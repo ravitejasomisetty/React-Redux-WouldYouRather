@@ -48,8 +48,9 @@ function AnsweredPoll(props) {
     </div>)
 }
 
-export default connect(({ users, authedUser }, props) => {
-    const { question } = props
+export default connect(({ users, authedUser, questions }, props) => {
+    const { question_id } = props.match.params
+    const question = questions[question_id]
 
     return {
         answered: users[authedUser].answers[question.id],

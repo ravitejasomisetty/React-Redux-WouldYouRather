@@ -1,5 +1,5 @@
 import React from 'react'
-import Poll from './Poll'
+import { Link } from 'react-router-dom'
 
 function ListPolls(props) {
     const { questionsToDisplay } = props
@@ -7,11 +7,12 @@ function ListPolls(props) {
     return <div>
         <ul>
             {questionsToDisplay.map(q =>
-                <li key={q.id}>
-                    <p>{`${q.optionOne.text} or ${q.optionTwo.text} by ${q.author}`}</p>
-                    <Poll question={q} />
-                    <hr />
-                </li>)}
+                <Link to={`/questions/${q.id}`} key={q.id}>
+                    <li>
+                        <p>{`${q.optionOne.text} or ${q.optionTwo.text} by ${q.author}`}</p>
+                        <hr />
+                    </li>
+                </Link>)}
         </ul>
     </div>;
 }

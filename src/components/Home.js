@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { handleInitialData } from '../actions/shared'
 import ListPolls from './ListPolls'
 
 class Home extends Component {
@@ -14,15 +13,12 @@ class Home extends Component {
         }))
     }
 
-    componentDidMount() {
-        this.props.dispatch(handleInitialData())
-    }
     render() {
         const { displayAnsweredQuestions } = this.state
-        const{ unansweredPolls, answeredPolls, authedUser } = this.props
+        const{ unansweredPolls, answeredPolls } = this.props
         const questionsToDisplay = !displayAnsweredQuestions ? unansweredPolls : answeredPolls
         
-        return !authedUser ? null : (            
+        return (            
             <div>
                 <button
                     onClick={this.toggleQuestions}>{`${displayAnsweredQuestions ? 'Unanswered' : 'Answered'} Questions`}</button>
@@ -38,13 +34,12 @@ function mapStateToProps({ questions, users, authedUser }) {
     const currentUser = users[authedUser]
 
     if (!currentUser)
-        return { authedUser }
+        return { }
 
     const unansweredPolls = Object.values(questions).filter(q => !currentUser.answers[q.id])
     const answeredPolls = Object.keys(currentUser.answers).map((qid) => questions[qid])
 
     return {
-        authedUser,
         unansweredPolls: Object.values(unansweredPolls)
             .sort((a, b) => b.timestamp - a.timestamp),
         answeredPolls: Object.values(answeredPolls)
