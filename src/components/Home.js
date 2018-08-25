@@ -19,9 +19,10 @@ class Home extends Component {
     }
     render() {
         const { displayAnsweredQuestions } = this.state
-        const questionsToDisplay = !displayAnsweredQuestions ? this.props.unansweredPolls : this.props.answeredPolls
+        const{ unansweredPolls, answeredPolls, authedUser } = this.props
+        const questionsToDisplay = !displayAnsweredQuestions ? unansweredPolls : answeredPolls
         
-        return (
+        return !authedUser ? null : (            
             <div>
                 <button
                     onClick={this.toggleQuestions}>{`${displayAnsweredQuestions ? 'Unanswered' : 'Answered'} Questions`}</button>
@@ -29,7 +30,7 @@ class Home extends Component {
                 <br />
                 <ListPolls questionsToDisplay={questionsToDisplay} />
             </div>
-        );
+        )
     }
 }
 
@@ -37,12 +38,13 @@ function mapStateToProps({ questions, users, authedUser }) {
     const currentUser = users[authedUser]
 
     if (!currentUser)
-        return { unansweredPolls: [], answeredPolls: [] }
+        return { authedUser }
 
     const unansweredPolls = Object.values(questions).filter(q => !currentUser.answers[q.id])
     const answeredPolls = Object.keys(currentUser.answers).map((qid) => questions[qid])
 
     return {
+        authedUser,
         unansweredPolls: Object.values(unansweredPolls)
             .sort((a, b) => b.timestamp - a.timestamp),
         answeredPolls: Object.values(answeredPolls)
