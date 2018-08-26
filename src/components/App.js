@@ -5,6 +5,7 @@ import Poll from './Poll'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import NewQuestion from './NewQuestion';
+import LeaderBoard from './LeaderBoard';
 
 class App extends Component {
     componentDidMount() {
@@ -21,6 +22,7 @@ class App extends Component {
                                 <Route path='/home' exact component={Home} />
                                 <Route path='/questions/:question_id' exact component={Poll} />
                                 <Route path='/add' exact component={NewQuestion} />
+                                <Route path='/leaderboard' exact component={LeaderBoard} />
                             </div>}
                     </div>
                 </Fragment>

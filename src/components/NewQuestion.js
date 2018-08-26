@@ -12,7 +12,6 @@ class NewQuestion extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log("Submitting")
         this.props.dispatch(handleAddQuestion({
             author: this.props.authedUser,
             optionOneText: this.state.optionOne, optionTwoText: this.state.optionTwo
