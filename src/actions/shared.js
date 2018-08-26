@@ -1,9 +1,6 @@
 import { receiveUsers } from './users'
 import { receiveQuestions } from './questions'
-import { setAuthedUser } from './authedUser'
 import { _getUsers, _getQuestions, _saveQuestionAnswer, _saveQuestion } from '../utils/_DATA'
-
-const AUTHED_ID = 'tylermcginnis'
 
 export function handleInitialData() {
     return (dispatch) => {
@@ -11,7 +8,6 @@ export function handleInitialData() {
             ([questions, users]) => {
                 dispatch(receiveQuestions(questions))
                 dispatch(receiveUsers(users))
-                dispatch(setAuthedUser(AUTHED_ID))
             }
         )
     }

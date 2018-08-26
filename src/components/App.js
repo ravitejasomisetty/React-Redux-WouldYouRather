@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import NewQuestion from './NewQuestion';
 import LeaderBoard from './LeaderBoard';
+import Login from './Login';
 
 class App extends Component {
     componentDidMount() {
@@ -19,13 +20,13 @@ class App extends Component {
                 <Fragment>
                     <div className='container'>
                         <Nav />
-                        {this.props.loading ? null :
-                            <div>
-                                <Route path='/home' exact component={Home} />
-                                <Route path='/questions/:question_id' exact component={Poll} />
-                                <Route path='/add' exact component={NewQuestion} />
-                                <Route path='/leaderboard' exact component={LeaderBoard} />
-                            </div>}
+                        <div>
+                            <Route path='/' exact component={Login} />
+                            <Route path='/home' exact component={Home} />
+                            <Route path='/questions/:question_id' exact component={Poll} />
+                            <Route path='/add' exact component={NewQuestion} />
+                            <Route path='/leaderboard' exact component={LeaderBoard} />
+                        </div>
                     </div>
                 </Fragment>
             </Router>
@@ -33,10 +34,4 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({ authedUser }) {
-    return {
-        loading: authedUser === null
-    }
-}
-
-export default connect(mapStateToProps)(App)
+export default connect()(App)

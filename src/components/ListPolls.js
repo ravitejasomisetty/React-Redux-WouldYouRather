@@ -23,7 +23,7 @@ function ListPolls(props) {
                     </Link>
                 </li>)}
         </ul>
-    </div>;
+    </div>
 }
 
 export default connect(({ users }, props) =>
