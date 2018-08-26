@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Home from './Home'
 import Poll from './Poll'
+import Nav from './Nav'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import NewQuestion from './NewQuestion';
@@ -17,6 +18,7 @@ class App extends Component {
             <Router>
                 <Fragment>
                     <div className='container'>
+                        <Nav />
                         {this.props.loading ? null :
                             <div>
                                 <Route path='/home' exact component={Home} />

@@ -23,8 +23,7 @@ function AnsweredPoll(props) {
         <img
             src={users[question.author].avatarURL}
             alt={`avatar of ${question.author}`}
-            height='25px'
-            width='25px' />
+            className='avatar' />
 
         <form>
             <fieldset>

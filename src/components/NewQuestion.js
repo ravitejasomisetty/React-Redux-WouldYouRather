@@ -32,7 +32,8 @@ class NewQuestion extends Component {
                     Option Two:
           <input type="text" id='optionTwo' value={this.state.optionTwo} onChange={this.handleChange} />
                 </label>
-                <input type="submit" value="Submit" />
+                <br />
+                <input type="submit" value="Submit" className='btn' />
             </form>
         </div>)
     }

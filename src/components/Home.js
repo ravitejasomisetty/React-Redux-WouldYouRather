@@ -15,12 +15,12 @@ class Home extends Component {
 
     render() {
         const { displayAnsweredQuestions } = this.state
-        const{ unansweredPolls, answeredPolls } = this.props
+        const { unansweredPolls, answeredPolls } = this.props
         const questionsToDisplay = !displayAnsweredQuestions ? unansweredPolls : answeredPolls
-        
-        return (            
+
+        return (
             <div>
-                <button
+                <button className='btn'
                     onClick={this.toggleQuestions}>{`${displayAnsweredQuestions ? 'Unanswered' : 'Answered'} Questions`}</button>
 
                 <br />
@@ -34,7 +34,7 @@ function mapStateToProps({ questions, users, authedUser }) {
     const currentUser = users[authedUser]
 
     if (!currentUser)
-        return { }
+        return {}
 
     const unansweredPolls = Object.values(questions).filter(q => !currentUser.answers[q.id])
     const answeredPolls = Object.keys(currentUser.answers).map((qid) => questions[qid])
