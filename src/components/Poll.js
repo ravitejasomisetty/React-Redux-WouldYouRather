@@ -5,8 +5,14 @@ import UnansweredPoll from './UnansweredPoll'
 function Poll(props) {
     const { answered, authedUser, question, users } = props
     return (
-        <div>
-            {answered ? AnsweredPoll(props) : <UnansweredPoll authedUser={authedUser} question={question} users={users} />}
+        <div className='question'>
+            <img
+                src={users[question.author].avatarURL}
+                alt={`avatar of ${question.author}`}
+                className='avatar' />
+            {answered ?
+                AnsweredPoll(props) :
+                <UnansweredPoll authedUser={authedUser} question={question} users={users} />}
         </div>)
 }
 
@@ -19,15 +25,10 @@ function AnsweredPoll(props) {
     percentOfVotesOptionOne = Math.round(percentOfVotesOptionOne).toFixed(2)
     percentOfVotesOptionTwo = Math.round(percentOfVotesOptionTwo).toFixed(2)
 
-    return (<div>
-        <img
-            src={users[question.author].avatarURL}
-            alt={`avatar of ${question.author}`}
-            className='avatar' />
-
-        <form>
-            <fieldset>
-                <legend>Would You Rather?</legend>
+    return (
+        <div className='question-info'>
+            <div>
+                <span> Would you rather </span>
                 <div className="radio">
                     <label>
                         <input type="radio" id='optionOne' name='poll' disabled='true'
@@ -42,9 +43,8 @@ function AnsweredPoll(props) {
                         {question.optionTwo.text}, {votesForOptionTwo} votes, {percentOfVotesOptionTwo}%
                     </label>
                 </div>
-            </fieldset>
-        </form>
-    </div>)
+            </div>
+        </div>)
 }
 
 export default connect(({ users, authedUser, questions }, props) => {

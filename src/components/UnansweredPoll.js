@@ -10,18 +10,12 @@ class UnansweredPoll extends React.Component {
     }
 
     render() {
-        const { question, users } = this.props
+        const { question } = this.props
 
-        return (<div>
-            <img
-                src={users[question.author].avatarURL}
-                alt={`avatar of ${question.author}`}
-                height='25px'
-                width='25px' />
-
-            <form>
-                <fieldset>
-                    <legend>Would You Rather?</legend>
+        return (
+            <div className='question-info'>
+                <div>
+                    <span> Would you rather </span>
                     <div className="radio">
                         <label>
                             <input type="radio" id='optionOne' name='poll' value='optionOne'
@@ -36,9 +30,8 @@ class UnansweredPoll extends React.Component {
                             {question.optionTwo.text}
                         </label>
                     </div>
-                </fieldset>
-            </form>
-        </div>)
+                </div>
+            </div>)
     }
 }
 
