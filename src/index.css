@@ -18,14 +18,16 @@ a {
 
 .btn {
   text-transform: uppercase;
-  margin: 35px auto;
-  padding: 10px;
+  margin: 10px auto;
+  padding: 5px;
   border: 1px solid rgba(0,0,0,.29);
   cursor: pointer;
   background: #fff;
   font-size: 16px;
-  width: 250px;
-  position: relative;
+  width: 250px auto;
+  position: center;
+  display: flex;
+  justify-content: center;
 }
 
 .btn:hover {
@@ -74,7 +76,7 @@ li {
   margin: 10px;
 }
 
-.tweet {
+.question {
   width: 100%;
   max-width: 590px;
   padding: 10px;
@@ -85,31 +87,43 @@ li {
   cursor: pointer;
 }
 
-.tweet-info {
+.question-info {
   margin: 10px;
   display: flex;
   flex-direction: column;
 }
 
 /* Hacky but less typing in the video */
-.tweet-info > div > span:first-child {
+.question-info > div > span:first-child {
   font-weight: bold;
   margin-right: 5px;
 }
-.tweet-info > div > span:nth-child(2) {
+.question-info > div > span:nth-child(2) {
   color: #969696;
   font-size: 16px;
 }
-.tweet-info > div > div {
+.question-info > div > div {
   color: #969696;
   font-size: 15px;
 }
-.tweet-info > div > p {
+.question-info > div > p {
   font-size: 18px;
   margin: 10px 0;
 }
 
-.heart-button {
-  background: transparent;
+.asked-by {
   border: none;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  color: #969696;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.textbox {
+  border-radius: 4px;
+  border: 1px solid #dad7d7;
+  padding: 10px;
+  font-size: 15px;
 }

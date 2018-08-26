@@ -20,11 +20,11 @@ class Home extends Component {
 
         return (
             <div>
+                <h3 className='center'>{displayAnsweredQuestions ? 'Answered Questions' : 'Unanswered Questions'}</h3>
+                <ListPolls questionsToDisplay={questionsToDisplay} />
+                <br />
                 <button className='btn'
                     onClick={this.toggleQuestions}>{`${displayAnsweredQuestions ? 'Unanswered' : 'Answered'} Questions`}</button>
-
-                <br />
-                <ListPolls questionsToDisplay={questionsToDisplay} />
             </div>
         )
     }

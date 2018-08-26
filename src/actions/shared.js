@@ -1,7 +1,7 @@
 import { receiveUsers } from './users'
 import { receiveQuestions } from './questions'
 import { setAuthedUser } from './authedUser'
-import { _getUsers, _getQuestions, _saveQuestionAnswer } from '../utils/_DATA'
+import { _getUsers, _getQuestions, _saveQuestionAnswer, _saveQuestion } from '../utils/_DATA'
 
 const AUTHED_ID = 'tylermcginnis'
 
@@ -23,5 +23,14 @@ export function handleSaveAnswer({ authedUser, qid, answer }) {
             .then(() => {
                 dispatch(handleInitialData())
             })
+    }
+}
+
+export function handleAddQuestion(question){
+    return (dispatch) => {
+        return _saveQuestion(question)
+        .then((q) =>{
+            dispatch(handleInitialData())
+        })
     }
 }

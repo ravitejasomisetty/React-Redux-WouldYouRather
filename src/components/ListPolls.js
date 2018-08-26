@@ -1,20 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 function ListPolls(props) {
-    const { questionsToDisplay } = props
+    const { users, questionsToDisplay } = props
 
     return <div>
-        <ul>
+        <ul className='dashboard-list'>
             {questionsToDisplay.map(q =>
-                <Link to={`/questions/${q.id}`} key={q.id}>
-                    <li>
-                        <p>{`${q.optionOne.text} or ${q.optionTwo.text} by ${q.author}`}</p>
-                        <hr />
-                    </li>
-                </Link>)}
+                <li key={q.id}>
+                    <Link to={`/questions/${q.id}`} className='question'>
+                        <img src={users[q.author].avatarURL}
+                            alt={`Avatar of ${q.author}`}
+                            className='avatar' />
+                        <div className='question-info'>
+                            <div>
+                                <span>Would you rather</span>
+                                <p>{`${q.optionOne.text} or ${q.optionTwo.text} ?`}</p>
+                            </div>
+                                <p className='asked-by'>by {users[q.author].name}</p>
+                        </div>
+                    </Link>
+                </li>)}
         </ul>
     </div>;
 }
 
-export default ListPolls
+export default connect(({ users }, props) =>
+    ({ users, questionsToDisplay: props.questionsToDisplay }))(ListPolls)
