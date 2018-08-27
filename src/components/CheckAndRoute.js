@@ -1,18 +1,16 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 function CheckAndRoute(props) {
-    const { component: Component, authedUser, ...rest } = props
+    const { component: Component, isAuthenticated, ...rest } = props
 
     return (
-        <Route {...rest} render={(props) => {
+        <Route {...rest} render={(routeProps) => {
             return (
-                authedUser
+                isAuthenticated
                     ?
-                    <Fragment>
-                        <Component {...props} />
-                    </Fragment>
+                    <Component {...routeProps} />
                     : <Redirect to={{
                         pathname: '/',
                         state: { from: props.location }
@@ -22,4 +20,10 @@ function CheckAndRoute(props) {
     )
 }
 
-export default connect(({ authedUser }) => ({ authedUser }))(CheckAndRoute)
+function mapStateToProps({ authedUser }) {
+    return {
+        isAuthenticated: authedUser !== null
+    }
+}
+
+export default connect(mapStateToProps, null, null, { pure: false })(CheckAndRoute)

@@ -24,7 +24,7 @@ export function Login(props) {
 
 const handleSignIn = (userId, props) => {
     const { dispatch, history, location } = props
-    const redirectTo = location.state ? location.state.from.pathname : '/home'
+    const redirectTo = location.state.from ? location.state.from.pathname : '/home'
     
     dispatch(setAuthedUser(userId))
     history.push(redirectTo)
