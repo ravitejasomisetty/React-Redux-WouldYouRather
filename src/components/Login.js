@@ -24,10 +24,11 @@ export function Login(props) {
 
 const handleSignIn = (userId, props) => {
     const { dispatch, history, location } = props
-    const redirectTo = location.state.from ? location.state.from.pathname : '/home'
+    let { from } = location.state || { from: { pathname: '/home' } }
+    from = from ? from : '/home'
     
     dispatch(setAuthedUser(userId))
-    history.push(redirectTo)
+    history.push(from)
 }
 
 export default connect(({ users }) => ({ users }))(Login)
