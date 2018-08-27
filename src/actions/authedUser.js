@@ -6,3 +6,7 @@ export function setAuthedUser(authedUser){
         authedUser
     }
 }
+
+export function resetAuthedUser(){
+    return setAuthedUser(null)
+}

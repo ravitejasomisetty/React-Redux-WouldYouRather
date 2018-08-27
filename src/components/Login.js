@@ -4,7 +4,6 @@ import { setAuthedUser } from '../actions/authedUser';
 
 export function Login(props) {
     const { users } = props
-
     return <div className='container'>
         <h3 className='center'>Identify yourself!</h3>
         <ul className='dashboard-list'>
@@ -24,9 +23,11 @@ export function Login(props) {
 }
 
 const handleSignIn = (userId, props) => {
-    const { dispatch, history } = props
+    const { dispatch, history, location } = props
+    const redirectTo = location.state ? location.state.from.pathname : '/home'
+    
     dispatch(setAuthedUser(userId))
-    history.push('/home')
+    history.push(redirectTo)
 }
 
 export default connect(({ users }) => ({ users }))(Login)
