@@ -3,6 +3,10 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { resetAuthedUser } from '../actions/authedUser';
 
+const handleSignOut = ({ resetUser }) => {
+    resetUser()
+}
+
 export function Nav(props) {
     const { userName } = props
     return (
@@ -21,7 +25,7 @@ export function Nav(props) {
                     Leader Board
                     </NavLink>
                 </li>
-                <li>{userName && <button onClick={handleSignOut.bind(this, props)}>
+                <li>{userName && <button onClick={() => handleSignOut(props)}>
                     Sign out
                     </button>}
                 </li>
@@ -31,9 +35,6 @@ export function Nav(props) {
     )
 }
 
-const handleSignOut = ({ dispatch }) => {
-    dispatch(resetAuthedUser())
-}
 
 function mapStateToProps({ users, authedUser }) {
     return {
@@ -41,4 +42,8 @@ function mapStateToProps({ users, authedUser }) {
     }
 }
 
-export default connect(mapStateToProps)(Nav)
+function mapDispatchToProps(dispatch) {
+    return { resetUser: () => dispatch(resetAuthedUser()) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav)

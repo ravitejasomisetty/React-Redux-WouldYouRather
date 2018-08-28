@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { HashRouter as Router, Route } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './Home'
 import Poll from './Poll'
 import Nav from './Nav'
+import PageNotFound from './PageNotFound'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import NewQuestion from './NewQuestion';
@@ -12,7 +13,7 @@ import CheckAndRoute from './CheckAndRoute';
 
 class App extends Component {
     componentDidMount() {
-        this.props.dispatch(handleInitialData())
+        this.props.loadData()
     }
 
     render() {
@@ -21,13 +22,14 @@ class App extends Component {
                 <Fragment>
                     <div className='container'>
                         <Nav />
-                        <div>
+                        <Switch>
                             <Route path='/' exact component={Login} />
                             <CheckAndRoute path='/home' exact component={Home} />
                             <CheckAndRoute path='/questions/:question_id' exact component={Poll} />
                             <CheckAndRoute path='/add' exact component={NewQuestion} />
                             <CheckAndRoute path='/leaderboard' exact component={LeaderBoard} />
-                        </div>
+                            <Route component={PageNotFound} />
+                        </Switch>
                     </div>
                 </Fragment>
             </Router>
@@ -35,4 +37,10 @@ class App extends Component {
     }
 }
 
-export default connect()(App)
+function mapDispatchToProps(dispatch){
+    return {
+        loadData: () => dispatch(handleInitialData())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(App)

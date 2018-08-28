@@ -12,8 +12,7 @@ class UnansweredPoll extends React.Component {
     render() {
         const { question } = this.props
 
-        return (
-            <div className='question-info'>
+        return (<div className='question-info'>
                 <div>
                     <span> Would you rather </span>
                     <div className="radio">
